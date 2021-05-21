@@ -8,7 +8,7 @@ public class Board extends JPanel implements ActionListener {
     private final int CHAR_SIZE = 10;
     private int BODY = 0;
 
-    private final int DELAY = 200;
+    private int DELAY = 200;
     private Timer timer;
     private int POINTS = 0;
 
@@ -78,6 +78,11 @@ public class Board extends JPanel implements ActionListener {
         if(hor[0] < 0 || ver[0] < 0 || hor[0] > B_WIDTH || ver[0] > B_HEIGHT) {
             STATE = false;
         }
+        for(int i = BODY; i > 0; i--) {
+            if(BODY > 4 && hor[0] == hor[i] && ver[0] == ver[i]) {
+                STATE = false;
+            }
+        }
     }
     //check if eaten
     private void eat() {
@@ -85,6 +90,10 @@ public class Board extends JPanel implements ActionListener {
             POINTS = POINTS + 1;
             BODY++;
             itemPosition();
+            if(DELAY > 50) {
+                DELAY = DELAY - 5;
+            }
+            timer.setDelay(DELAY);
         }
     }
 
@@ -116,7 +125,11 @@ public class Board extends JPanel implements ActionListener {
             showPoints(g);
 
             for (int i = 0; i < BODY; i++) {
-                character.newCharacter(g, hor[i], ver[i], CHAR_SIZE);
+                if(i == 0) {
+                    character.newCharacter(g, hor[i], ver[i], CHAR_SIZE);
+                } else {
+                    character.newCharacter(g, hor[i], ver[i], CHAR_SIZE);
+                }
             }
             item.newItem(g, ITEM_X_POS, ITEM_Y_POS, CHAR_SIZE);
         } else {
