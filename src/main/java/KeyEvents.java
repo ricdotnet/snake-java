@@ -2,7 +2,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyEvents extends KeyAdapter {
-//    Board board = new Board();
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_UP && Board.DIRECTION != "down") {

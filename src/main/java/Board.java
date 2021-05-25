@@ -24,7 +24,6 @@ public class Board extends JPanel implements ActionListener {
     private int hor[] = new int[560];
     private int ver[] = new int[560];
 
-
     private final Character character = new Character();
     private final Item item = new Item();
 
@@ -79,8 +78,9 @@ public class Board extends JPanel implements ActionListener {
             STATE = false;
         }
         for(int i = BODY; i > 0; i--) {
-            if(BODY > 4 && hor[0] == hor[i] && ver[0] == ver[i]) {
+            if (BODY > 4 && hor[0] == hor[i] && ver[0] == ver[i]) {
                 STATE = false;
+                break;
             }
         }
     }
@@ -125,11 +125,7 @@ public class Board extends JPanel implements ActionListener {
             showPoints(g);
 
             for (int i = 0; i < BODY; i++) {
-                if(i == 0) {
-                    character.newCharacter(g, hor[i], ver[i], CHAR_SIZE);
-                } else {
-                    character.newCharacter(g, hor[i], ver[i], CHAR_SIZE);
-                }
+                character.newCharacter(g, hor[i], ver[i], CHAR_SIZE);
             }
             item.newItem(g, ITEM_X_POS, ITEM_Y_POS, CHAR_SIZE);
         } else {
